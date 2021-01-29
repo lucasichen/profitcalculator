@@ -1,0 +1,29 @@
+from yahoo_fin import stock_info as si
+
+# To round current price
+def truncate(n, decimals=0):
+    multiplier = 10 ** decimals
+    return int(n * multiplier) / multiplier
+
+def net(shares, price):
+    while True:
+        bought = shares*price
+        current = truncate(si.get_live_price("amc"),3)
+        key = input()
+        
+        if key == "q":
+            break
+            
+        if key == "a":
+            profit = (shares*current)-bought
+            
+            print("Current price is at: ", current)
+            print("Net: ", profit*1.3)
+
+def main():
+    shares = float(input("How many shares: (325)" ))
+    price = float(input("Price bought: (13.0575?)"))
+    net(shares, price)
+
+        
+main()
