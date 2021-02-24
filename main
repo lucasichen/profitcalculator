@@ -8,7 +8,8 @@ def truncate(n, decimals=0):
 def net(shares, price):
     while True:
         bought = shares*price
-        current = truncate(si.get_live_price("amc"),3) # change the ticket to stock price wanted
+        ticket = input("Input the ticker you wish to follow")
+        current = truncate(si.get_live_price(ticket),3) # change the ticket to stock price wanted
         key = input()
         
         if key == "q":
@@ -24,6 +25,5 @@ def main():
     shares = float(input("How many shares: " ))
     price = float(input("Price bought: "))
     net(shares, price)
-
-        
+    
 main()
