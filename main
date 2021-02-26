@@ -16,10 +16,12 @@ def net(shares, price):
             break
             
         if key == "a":
-            profit = (shares*current)-bought
+            while True:
+                current = truncate(si.get_live_price("amc"),3) # change the ticket to stock price wanted
+                profit = ((shares*current)-bought)*1.3
             
-            print("Current price is at: ", current)
-            print("Net: ", profit*1.3)
+                print("Current price is at: ${}".format(current), end = '   ')
+                print("Net: ${}".format(truncate(profit,2)), end='\r')
 
 def main():
     shares = float(input("How many shares: " ))
