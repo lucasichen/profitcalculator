@@ -1,0 +1,63 @@
+from tkinter import *
+
+from yahoo_fin import stock_info as si
+
+# To round current price
+def truncate(n, decimals=0):
+    multiplier = 10 ** decimals
+    return int(n * multiplier) / multiplier
+
+def net():
+    try:
+        shares = float(shareEntry.get())
+        price = float(priceEntry.get())
+        bought = shares*price
+        
+        ticket = ticketEntry.get()
+        current = truncate(si.get_live_price(ticket),3) # change the ticket to stock price wanted
+        
+        profit = (shares*current)-bought
+        profit = profit*1.3
+        currentLabel1.config(text = current)
+        profitLabel1.config(text = truncate(profit,2))
+            
+    except ValueError: 
+        validLabel.config(text = "Invalid input")
+        
+root = Tk()
+root.title("Profit Calculator")
+
+ticketLabel = Label(root, text = "Enter ticket: ")
+shareLabel = Label(root, text = "Number of shares: ")
+priceLabel = Label(root, text = "Average price of shares: ")
+validLabel = Label(root, text = '')
+currentLabel = Label(root, text = "Current price: ")
+profitLabel = Label(root, text = "Net profit: ")
+currentLabel1 = Label(root)
+profitLabel1 = Label(root)
+
+ticketLabel.grid(row = 0, column = 0)
+shareLabel.grid(row = 1, column = 0)
+priceLabel.grid(row = 2, column = 0)
+validLabel.grid(row = 4, column = 0)
+currentLabel.grid(row = 5, column = 1)
+profitLabel.grid(row = 6, column = 1)
+currentLabel1.grid(row = 5, column = 2)
+profitLabel1.grid(row = 6, column = 2)
+
+shareEntry = StringVar()
+priceEntry = StringVar()
+ticketEntry = StringVar()
+
+ticketEntry = Entry(root, width = "20")
+shareEntry = Entry(root, width = "20")
+priceEntry = Entry(root, width = "20")
+
+ticketEntry.grid(row = 0, column = 1)
+shareEntry.grid(row = 1, column = 1)
+priceEntry.grid(row = 2, column = 1)
+
+profitButton = Button(root, padx = "10", pady = "10",text = "Calculate Profit", command = net)
+profitButton.grid(row = 4, column = 0)
+
+root.mainloop()
