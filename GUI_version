@@ -7,6 +7,7 @@ def truncate(n, decimals=0):
     multiplier = 10 ** decimals
     return int(n * multiplier) / multiplier
 
+# calculate net
 def net():
     try:
         shares = float(shareEntry.get())
@@ -23,10 +24,12 @@ def net():
             
     except ValueError: 
         validLabel.config(text = "Invalid input")
-        
+
+# To generate GUI
 root = Tk()
 root.title("Profit Calculator")
 
+# Text Labels
 ticketLabel = Label(root, text = "Enter ticket: ")
 shareLabel = Label(root, text = "Number of shares: ")
 priceLabel = Label(root, text = "Average price of shares: ")
@@ -36,6 +39,7 @@ profitLabel = Label(root, text = "Net profit: ")
 currentLabel1 = Label(root)
 profitLabel1 = Label(root)
 
+# Label organization
 ticketLabel.grid(row = 0, column = 0)
 shareLabel.grid(row = 1, column = 0)
 priceLabel.grid(row = 2, column = 0)
@@ -45,18 +49,22 @@ profitLabel.grid(row = 6, column = 1)
 currentLabel1.grid(row = 5, column = 2)
 profitLabel1.grid(row = 6, column = 2)
 
+#Ensure string for variables
 shareEntry = StringVar()
 priceEntry = StringVar()
 ticketEntry = StringVar()
 
+#Initialize Entry
 ticketEntry = Entry(root, width = "20")
 shareEntry = Entry(root, width = "20")
 priceEntry = Entry(root, width = "20")
 
+# Entry organization
 ticketEntry.grid(row = 0, column = 1)
 shareEntry.grid(row = 1, column = 1)
 priceEntry.grid(row = 2, column = 1)
 
+#Button creation
 profitButton = Button(root, padx = "10", pady = "10",text = "Calculate Profit", command = net)
 profitButton.grid(row = 4, column = 0)
 
